@@ -4,25 +4,48 @@ const rl = readline.createInterface({
     output: process.stdout
 })
 
-let i
-let num1 = 0 , num2 = 0, max = [];
+let num1 = 0
+let num2 = 0
 
 rl.question('Digite o primeiro numero\n', (num1) => {
     rl.question("Digite o segundo numero\n", (num2) => {
-        max = Math.max(num1, num2)
+        let input = data.toString().trim()
 
-        do{
-            if(max % num1 == 0 && max % num2 == 0){
-                console.log('O MMC é '+max);
+        if(!num1) {
+    
+            num1 = input
+        } else {
+            num2 = input
+    
+            let i
+            let maior
+            let menor
+    
+            if(num1 > num2) {
+                maior = num1
+                menor = num2
+            } else {
+                maior = num2
+                menor = num1
             }
-            max++
-        }while(true);
-        do{
-            if (num1 % i == 0 && num2 % i ==0){
-                console.log('O MDC é: '+i );
-                break;
+    
+            i = maior
+            for (i; i <= num1 * num2; i += maior) {
+                if(i % num1 == 0 && i % num2 == 0) {
+                    console.log("MMC: " + i)
+                    break;
                 }
-                i++
-                }while(true);
-            })
-        })
+            }
+    
+            i = menor
+    
+            for(i; i > 0; i--) {
+                if(num1 % i == 0 && num2 % i ==0) {
+                    console.log("MDC: " + i)
+                    break;
+                }
+            }
+            process.exit();
+        }
+    })
+})
